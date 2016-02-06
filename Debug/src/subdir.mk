@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/ChangeColorSpace.cpp \
 ../src/DisplayImage.cpp \
-../src/DisplayImageInColor.cpp 
+../src/DisplayImageInGrayscale.cpp 
 
 OBJS += \
+./src/ChangeColorSpace.o \
 ./src/DisplayImage.o \
-./src/DisplayImageInColor.o 
+./src/DisplayImageInGrayscale.o 
 
 CPP_DEPS += \
+./src/ChangeColorSpace.d \
 ./src/DisplayImage.d \
-./src/DisplayImageInColor.d 
+./src/DisplayImageInGrayscale.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
