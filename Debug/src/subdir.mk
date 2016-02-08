@@ -4,19 +4,37 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/ChangeColorSpace.cpp \
+../src/CannyEdgeDetectionDemo.cpp \
+../src/ChangeColorSpaceDemo.cpp \
+../src/CountingWithGuassianBlurDemo.cpp \
 ../src/DisplayImage.cpp \
-../src/DisplayImageInGrayscale.cpp 
+../src/DisplayImageInGrayscale.cpp \
+../src/ErosionAndDilationDemo.cpp \
+../src/FindCountoursDemo.cpp \
+../src/GuassianBlurDemo.cpp \
+../src/OpeningMorphologicalOperationsDemo.cpp 
 
 OBJS += \
-./src/ChangeColorSpace.o \
+./src/CannyEdgeDetectionDemo.o \
+./src/ChangeColorSpaceDemo.o \
+./src/CountingWithGuassianBlurDemo.o \
 ./src/DisplayImage.o \
-./src/DisplayImageInGrayscale.o 
+./src/DisplayImageInGrayscale.o \
+./src/ErosionAndDilationDemo.o \
+./src/FindCountoursDemo.o \
+./src/GuassianBlurDemo.o \
+./src/OpeningMorphologicalOperationsDemo.o 
 
 CPP_DEPS += \
-./src/ChangeColorSpace.d \
+./src/CannyEdgeDetectionDemo.d \
+./src/ChangeColorSpaceDemo.d \
+./src/CountingWithGuassianBlurDemo.d \
 ./src/DisplayImage.d \
-./src/DisplayImageInGrayscale.d 
+./src/DisplayImageInGrayscale.d \
+./src/ErosionAndDilationDemo.d \
+./src/FindCountoursDemo.d \
+./src/GuassianBlurDemo.d \
+./src/OpeningMorphologicalOperationsDemo.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
