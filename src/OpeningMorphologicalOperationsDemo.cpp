@@ -16,6 +16,7 @@
 //int const max_elem = 2;
 //int const max_kernel_size = 21;
 //
+//
 //char* window_name = "Morphology Transformations Demo";
 //
 ///** Function Headers */
@@ -30,12 +31,11 @@
 //		return -1;
 //	}
 //
-//	// Guassian Blur
-//	int sigma = 0.9;
-//	GaussianBlur(src, src, Size(15, 15), sigma);
+//	// Blur
+//	blur(src, src, Size(3,3));
 //
 //	// Convert to Black and White
-//	src = src > 185;
+//	src = src > 210;
 //
 //	// bitwise_not(src, src);
 //
@@ -74,6 +74,6 @@
 //			Point(morph_size, morph_size));
 //
 //	/// Apply the specified morphology operation
-//	morphologyEx(src, dst, operation, element);
+//	morphologyEx(src, dst, operation, element, Point(-1, -1), 1);
 //	imshow(window_name, dst);
 //}

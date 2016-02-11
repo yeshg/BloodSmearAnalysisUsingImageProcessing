@@ -12,7 +12,8 @@ CPP_SRCS += \
 ../src/ErosionAndDilationDemo.cpp \
 ../src/FindCountoursDemo.cpp \
 ../src/GuassianBlurDemo.cpp \
-../src/OpeningMorphologicalOperationsDemo.cpp 
+../src/OpeningMorphologicalOperationsDemo.cpp \
+../src/WatershedAndDistanceTransform.cpp 
 
 OBJS += \
 ./src/CannyEdgeDetectionDemo.o \
@@ -23,7 +24,8 @@ OBJS += \
 ./src/ErosionAndDilationDemo.o \
 ./src/FindCountoursDemo.o \
 ./src/GuassianBlurDemo.o \
-./src/OpeningMorphologicalOperationsDemo.o 
+./src/OpeningMorphologicalOperationsDemo.o \
+./src/WatershedAndDistanceTransform.o 
 
 CPP_DEPS += \
 ./src/CannyEdgeDetectionDemo.d \
@@ -34,7 +36,8 @@ CPP_DEPS += \
 ./src/ErosionAndDilationDemo.d \
 ./src/FindCountoursDemo.d \
 ./src/GuassianBlurDemo.d \
-./src/OpeningMorphologicalOperationsDemo.d 
+./src/OpeningMorphologicalOperationsDemo.d \
+./src/WatershedAndDistanceTransform.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
