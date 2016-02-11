@@ -14,7 +14,7 @@ int main(int, char** argv) {
 	// Create binary image with black background, white cells
 
 	blur(src, src, Size(3,3));
-	src = src < 210;
+	bitwise_not(src, src);
 	// Show output image
 	imshow("Black Background Image", src);
 
@@ -41,7 +41,7 @@ int main(int, char** argv) {
 	// Create binary image from source image
 	Mat bw;
 	cvtColor(src, bw, CV_BGR2GRAY);
-	threshold(bw, bw, 40, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+	threshold(bw, bw, 0, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
 	imshow("Binary Image", bw);
 	// Perform the distance transform algorithm
 	Mat dist;
