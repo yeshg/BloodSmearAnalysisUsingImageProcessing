@@ -11,16 +11,22 @@ int main(int, char** argv) {
 		return -1;
 	// Show source image
 	imshow("Source Image", src);
+
+
 	// Create binary image with black background, white cells
 
 	blur(src, src, Size(3,3));
 	bitwise_not(src, src);
+
+
 	// Show output image
 	imshow("Black Background Image", src);
 
 
 	// Create a kernel that we will use for accuting/sharpening our image
 	Mat kernel = (Mat_<float>(3, 3) << 1, 1, 1, 1, -8, 1, 1, 1, 1); // an approximation of second derivative, a quite strong kernel
+
+
 	// do the laplacian filtering as it is
 	// well, we need to convert everything in something more deeper then CV_8U
 	// because the kernel has some negative values,
@@ -32,27 +38,37 @@ int main(int, char** argv) {
 	filter2D(sharp, imgLaplacian, CV_32F, kernel);
 	src.convertTo(sharp, CV_32F);
 	Mat imgResult = sharp - imgLaplacian;
+
+
 	// convert back to 8bits gray scale
 	imgResult.convertTo(imgResult, CV_8UC3);
 	imgLaplacian.convertTo(imgLaplacian, CV_8UC3);
 	imshow( "Laplace Filtered Image", imgLaplacian );
 	imshow("New Sharped Image", imgResult);
 	src = imgResult; // copy back
+
+
 	// Create binary image from source image
 	Mat bw;
 	cvtColor(src, bw, CV_BGR2GRAY);
-	threshold(bw, bw, 0, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+	threshold(bw, bw, 40, 255, CV_THRESH_BINARY | CV_THRESH_OTSU); // Used to be 40
 	imshow("Binary Image", bw);
 	// Perform the distance transform algorithm
 	Mat dist;
 	distanceTransform(bw, dist, CV_DIST_L2, 3);
+
+
 	// Normalize the distance image for range = {0.0, 1.0}
 	// so we can visualize and threshold it
 	normalize(dist, dist, 0, 1., NORM_MINMAX);
 	imshow("Distance Transform Image", dist);
+
+
 	// Threshold to obtain the peaks
 	// This will be the markers for the foreground objects
 	threshold(dist, dist, .4, 1., CV_THRESH_BINARY);
+
+
 	// Dilate a bit the dist image
 	Mat kernel1 = Mat::ones(3, 3, CV_8UC1);
 	dilate(dist, dist, kernel1);
@@ -61,6 +77,8 @@ int main(int, char** argv) {
 	// It is needed for findContours()
 	Mat dist_8u;
 	dist.convertTo(dist_8u, CV_8U);
+
+
 	// Find total markers
 	vector<vector<Point> > contours;
 	findContours(dist_8u, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
@@ -70,6 +88,8 @@ int main(int, char** argv) {
 	for (size_t i = 0; i < contours.size(); i++)
 		drawContours(markers, contours, static_cast<int>(i),
 				Scalar::all(static_cast<int>(i) + 1), -1);
+
+
 	// Draw the background marker
 	circle(markers, Point(5, 5), 3, CV_RGB(255, 255, 255), -1);
 	imshow("Markers", markers * 10000);
@@ -78,7 +98,7 @@ int main(int, char** argv) {
 	Mat mark = Mat::zeros(markers.size(), CV_8UC1);
 	markers.convertTo(mark, CV_8UC1);
 	bitwise_not(mark, mark);
-//    imshow("Markers_v2", mark); // uncomment this if you want to see how the mark
+    imshow("Markers_v2", mark); // uncomment this if you want to see how the mark
 	// image looks like at that point
 	// Generate random colors
 	vector<Vec3b> colors;
@@ -88,6 +108,8 @@ int main(int, char** argv) {
 		int r = theRNG().uniform(0, 255);
 		colors.push_back(Vec3b((uchar) b, (uchar) g, (uchar) r));
 	}
+
+
 	// Create the result image
 	Mat dst = Mat::zeros(markers.size(), CV_8UC3);
 	// Fill labeled objects with random colors
@@ -100,6 +122,8 @@ int main(int, char** argv) {
 				dst.at<Vec3b>(i, j) = Vec3b(0, 0, 0);
 		}
 	}
+
+
 	// Visualize the final image
 	imshow("Final Result", dst);
 	waitKey(0);
